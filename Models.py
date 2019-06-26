@@ -1,7 +1,7 @@
 class nGrams(object):
 
     def __init__(self):
-        #self.value = {}
+        self.value = {}
         pass
 
     def NGram(self, dictionary, poem, nGram):
@@ -32,7 +32,7 @@ class nGrams(object):
                         create_dic = {words[k]:create_dic}
                     temp_dic[current_word] = create_dic
                     break
-        #self.value = dictionary
+        self.value = dictionary
         return(dictionary)
 
     def BiGram(dic, poem):
