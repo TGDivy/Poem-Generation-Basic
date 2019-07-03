@@ -1,3 +1,5 @@
+from math import inf
+from math import log
 class nGrams(object):
 
     def __init__(self):
@@ -83,3 +85,28 @@ class nGrams(object):
                 Max = j
                 next_word = i
         return(next_word)
+
+    def next_word_prob(words, dic, nGram, a=0.1):
+        Max = -inf
+        next_word = ""
+        dictionary = dic
+        for word in words:
+            dictionary = dictionary[word]
+
+        #print((list(dictionary.values())[0]))
+
+        if(not (((list(dictionary.values())[0])<1)) ):
+            total_counts = 0
+            for i,j in list(dictionary.items()):
+                total_counts = total_counts+j
+            #print(total_counts)
+            items = list(dictionary.items())
+            alpha = a*total_counts
+            for i,j in items:
+                dictionary[i] = ((j+alpha)/(total_counts + alpha*len(items)))
+
+        for i,j in list(dictionary.items()):
+            if(j>Max):
+                Max = j
+                next_word = i
+        return(next_word, Max)
