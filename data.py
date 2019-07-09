@@ -2,18 +2,33 @@ import pandas as pd
 import nltk
 
 class Poems():
-    def __init__(self, poems_data_location, syllable_dict_location = "syllable_dict.txt", updated_syllable_dict = "new_words_syllables.csv"):
+    def __init__(self, poems_data_location,
+                       syllable_dict_location = "syllable_dict.txt",
+                       updated_syllable_dict = "new_words_syllables.csv",
+                       files = 1):
+
+        #Declaring the fields
         self.data_location = poems_data_location
-        self.poems = self.__PoetryFoundationPoems()
-        print("self.poems is ready!")
-        self.word_syllablecount_dict = self.__SyllablesDict(syllable_dict_location, updated_syllable_dict)
-        print("self.word_syllablecount_dict is ready!")
-        self.poems_of_syllables = self.__PoemOfSyllables()
-        print("self.poems_of_syllables is ready!")
-        self.poems = self.__Poem_words_dict()
-        print("self.poems is updated!")
-        self.poems_of_POStags, self.word_POStag_dict = self.__poem_of_tags()
-        print("self.poems_of_POStags and self.word_POStag_dict are ready!")
+        self.poems = "It is not ready yet."
+        self.word_syllablecount_dict = "It is not ready yet, set files>=2"
+        self.poems_of_syllables = "It is not ready yet, set files >=2"
+        self.poems_of_POStags = "It is not ready yet, set files >=3"
+        self.word_POStag_dict = "It is not ready yet, set files >=3"
+        if(files>=1):
+            self.poems = self.__PoetryFoundationPoems()
+            print("self.poems is ready!")
+
+        if(files >= 2):
+            self.word_syllablecount_dict = self.__SyllablesDict(syllable_dict_location, updated_syllable_dict)
+            print("self.word_syllablecount_dict is ready!")
+            self.poems_of_syllables = self.__PoemOfSyllables()
+            print("self.poems_of_syllables is ready!")
+            self.poems = self.__Poem_words_dict()
+            print("self.poems is updated!")
+
+        if(files>=3):
+            self.poems_of_POStags, self.word_POStag_dict = self.__poem_of_tags()
+            print("self.poems_of_POStags and self.word_POStag_dict are ready!")
 
     def __PoetryFoundationRaw(self):
         data = pd.read_csv(self.data_location)
